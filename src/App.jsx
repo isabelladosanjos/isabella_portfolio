@@ -5,7 +5,7 @@ import {
   Github, Linkedin, Mail, Globe, Moon, Sun, 
   MapPin, ExternalLink, Music, Sparkles, 
   ArrowRight, Box, ShieldCheck, Workflow, CheckCircle, 
-  Send, AlertCircle, Users, Brain, Clock
+  Send, AlertCircle, Users, Brain, Clock, Layers
 } from 'lucide-react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -37,8 +37,10 @@ const content = {
       title: 'Projetos em Destaque',
       desktopCat: 'Desktop Engineering',
       aiCat: 'AI & Web Solutions',
+      webCat: 'Web Development & Leadership',
       btnCode: 'Ver Código',
       btnLive: 'Testar Online',
+      btnLegacy: 'Projeto Concluído (2024)',
       
       // Projeto 1: Belle Time
       p1_title: 'Belle Time - Studio System',
@@ -53,7 +55,13 @@ const content = {
       p2_tech: ['Python', 'Groq API', 'Streamlit', 'LLM Engineering'],
       p2_role: 'AI Implementation',
       p2_repo: 'https://github.com/isabelladosanjos/SymphonyIA_ProjetoADS',
-      p2_live: 'https://symphonyiaprojetoads-5dfiru6tjoubjst8kvsabn.streamlit.app/'
+      p2_live: 'https://symphonyiaprojetoads-5dfiru6tjoubjst8kvsabn.streamlit.app/',
+
+      // Projeto 3: Robson Pinturas (NOVO)
+      p3_title: 'Robson Pinturas - Digital Presence',
+      p3_desc: 'Liderança técnica no desenvolvimento de uma plataforma mobile-first. Implementação de WhatsApp Business API para conversão de leads e Google OAuth para segurança.',
+      p3_tech: ['JavaScript', 'Bootstrap', 'WhatsApp API', 'OAuth 2.0'],
+      p3_role: 'Tech Lead & Full Front-End',
     },
     contact: {
       title: 'Vamos criar algo incrível?',
@@ -77,49 +85,51 @@ const content = {
     hero: {
       role: 'Back-end Developer & AI Enthusiast',
       title: 'Code with Soul & Logic',
-      subtitle: 'Developer passionate about software architecture, automation, and artificial intelligence. I turn complex business rules into elegant, scalable systems.',
+      subtitle: 'Developer passionate about software architecture, automation, and artificial intelligence.',
       location: 'Sorocaba, Brazil',
       btnProject: 'View Portfolio',
       btnContact: 'Get in Touch'
     },
     about: {
       title: 'The Architect Behind the Code',
-      desc1: 'My technical journey combines Back-end precision with AI creativity. Currently studying Analysis and Systems Development at UNISO.',
-      desc2: 'I have practical experience building robust desktop systems (Python/SQL) and modern AI agents (Groq API). My focus is delivering performance without sacrificing code aesthetics.',
+      desc1: 'My technical journey combines Back-end precision with AI creativity. Currently studying ADS at UNISO.',
+      desc2: 'I have practical experience building robust desktop systems (Python/SQL) and modern AI agents (Groq API).',
       skillsTitle: 'Technical & Human Arsenal'
     },
     skills: {
       cat1: 'Back-end & Architecture',
       cat2: 'Database',
-      cat3: 'DevOps & Tools',
-      cat4: 'Frontend & UI',
-      cat5: 'Soft Skills (Interpersonal)'
+      cat5: 'Soft Skills'
     },
     projects: {
       title: 'Featured Projects',
       desktopCat: 'Desktop Engineering',
       aiCat: 'AI & Web Solutions',
+      webCat: 'Web Development & Leadership',
       btnCode: 'View Code',
       btnLive: 'Live Demo',
+      btnLegacy: 'Completed Project (2024)',
       p1_title: 'Belle Time - Studio System',
-      p1_desc: 'Complete management system for beauty salons (Studio Ella’s). Handles complex scheduling, client database, and financial flow with strict data integrity.',
+      p1_desc: 'Complete management system for beauty salons. Handles complex scheduling and financial flow.',
       p1_tech: ['Python', 'MySQL', 'PySide6', 'VirtualBox'],
       p1_role: 'Full System Architecture',
-      p1_repo: 'https://github.com/isabelladosanjos/BelleTime_Agenda',
       p2_title: 'Symphony IA - Music Agent',
-      p2_desc: 'Intelligent agent that analyzes user sentiment via natural language processing and recommends personalized music playlists using Groq API.',
+      p2_desc: 'Intelligent agent that recommends music based on user sentiment via NLP.',
       p2_tech: ['Python', 'Groq API', 'Streamlit', 'LLM Engineering'],
       p2_role: 'AI Implementation',
-      p2_repo: 'https://github.com/isabelladosanjos/SymphonyIA_ProjetoADS',
-      p2_live: 'https://symphonyiaprojetoads-5dfiru6tjoubjst8kvsabn.streamlit.app/'
+      // Projeto 3 EN
+      p3_title: 'Robson Pinturas - Digital Presence',
+      p3_desc: 'Technical leadership for a mobile-first platform. Integrated WhatsApp API and Google OAuth.',
+      p3_tech: ['JavaScript', 'Bootstrap', 'WhatsApp API', 'OAuth 2.0'],
+      p3_role: 'Tech Lead & Full Front-End',
     },
     contact: {
       title: 'Let\'s build something amazing?',
-      desc: 'Fill out the form below. The message will arrive directly in my professional email.',
+      desc: 'Fill out the form below. I will get back to you shortly.',
       btn: 'Send Message',
       sending: 'Sending...',
-      success: 'Message sent successfully! I will contact you shortly.',
-      error: 'There was an error sending. Please try again or contact me on LinkedIn.',
+      success: 'Message sent successfully!',
+      error: 'Error sending message.',
       placeholderName: 'Your Name',
       placeholderEmail: 'Your Email',
       placeholderMsg: 'Your Message'
@@ -141,7 +151,6 @@ const App = () => {
 
   const t = content[lang];
 
-  // Variável de Soft Skills
   const softSkillsList = lang === 'pt' 
     ? ['Trabalho em Equipe', 'Organização', 'Comunicação Clara', 'Resolução de Problemas', 'Adaptabilidade'] 
     : ['Teamwork', 'Organization', 'Clear Communication', 'Problem Solving', 'Adaptability'];
@@ -156,18 +165,16 @@ const App = () => {
   const sendEmail = (e) => {
     e.preventDefault();
     setFormStatus('sending');
-
-    // --- COLOQUE SUAS CHAVES DO EMAILJS AQUI ---
     const SERVICE_ID = 'service_parjxqq';   
     const TEMPLATE_ID = 'template_pkxt7e5'; 
     const PUBLIC_KEY = 'y8ylFUesGIArqOpkq';   
 
     emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
-      .then((result) => {
+      .then(() => {
           setFormStatus('success');
           e.target.reset();
           setTimeout(() => setFormStatus('idle'), 5000);
-      }, (error) => {
+      }, () => {
           setFormStatus('error');
           setTimeout(() => setFormStatus('idle'), 5000);
       });
@@ -178,7 +185,6 @@ const App = () => {
 
   const styles = `
     :root {
-      /* DARK MODE */
       --bg-body: #0a0508; 
       --bg-card: #140a0f;
       --bg-footer: #050204;
@@ -196,7 +202,6 @@ const App = () => {
     }
 
     [data-theme="light"] {
-      /* LIGHT MODE */
       --bg-body: #fdfbf7; 
       --bg-card: #ffffff;
       --bg-footer: #f2efe9;
@@ -215,22 +220,8 @@ const App = () => {
       color: var(--text-main) !important;
       font-family: var(--font-body);
       transition: all 0.3s ease;
-      overflow-x: hidden;
     }
 
-    h1, h2, h3, h4, h5, h6 {
-      color: var(--text-main) !important;
-      font-family: var(--font-display);
-      font-weight: 700;
-    }
-
-    a { color: var(--text-main); transition: 0.2s; }
-    a:hover { color: var(--accent); }
-
-    .text-muted-custom { color: var(--text-muted) !important; }
-    .font-code { font-family: var(--font-code); }
-    .text-accent { color: var(--accent) !important; }
-    
     .btn-goth {
       border: 1px solid var(--accent);
       color: var(--text-main);
@@ -240,40 +231,17 @@ const App = () => {
       font-size: 0.85rem;
       letter-spacing: 1px;
       transition: all 0.3s;
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
       text-decoration: none;
-      cursor: pointer;
     }
     
-    .btn-goth:disabled { opacity: 0.7; cursor: not-allowed; }
-    .btn-goth::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; width: 0%; height: 100%;
-      background: var(--accent);
-      z-index: -1;
-      transition: width 0.3s;
-    }
     .btn-goth:hover:not(:disabled) {
+      background: var(--accent);
       color: #fff !important;
       box-shadow: 0 0 20px var(--accent-glow);
-    }
-    .btn-goth:hover:not(:disabled)::before { width: 100%; }
-
-    .btn-goth-fill {
-      background: var(--accent);
-      color: #fff;
-      border: 1px solid var(--accent);
-    }
-    .btn-goth-fill:hover {
-      background: transparent;
-      color: var(--text-main) !important;
     }
 
     .glass-card {
@@ -281,7 +249,7 @@ const App = () => {
       border: 1px solid var(--border);
       padding: 2rem;
       border-radius: 4px; 
-      transition: transform 0.3s, border-color 0.3s;
+      transition: all 0.3s;
       height: 100%;
     }
 
@@ -290,6 +258,23 @@ const App = () => {
       border-color: var(--accent);
     }
 
+    .nav-blur {
+      background: var(--bg-glass);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .skill-badge {
+      font-family: var(--font-code);
+      font-size: 0.85rem;
+      padding: 6px 12px;
+      background: rgba(128, 128, 128, 0.1);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+    .text-accent { color: var(--accent) !important; }
+    .text-muted-custom { color: var(--text-muted) !important; }
+    .font-code { font-family: var(--font-code); }
     .input-underlined {
       background: transparent;
       border: none;
@@ -298,85 +283,6 @@ const App = () => {
       padding: 15px 0;
       width: 100%;
       outline: none;
-      transition: border-color 0.3s;
-      border-radius: 0;
-    }
-    .input-underlined:focus {
-      border-bottom-color: var(--accent);
-      box-shadow: none;
-    }
-
-    .skill-category {
-      border-left: 2px solid var(--border);
-      padding-left: 1.5rem;
-      transition: border-color 0.3s;
-    }
-    .skill-category:hover {
-      border-left-color: var(--accent);
-    }
-
-    /* ESTILO DOS BADGES (SKILLS) */
-    .skill-badge {
-      font-family: var(--font-code);
-      font-size: 0.85rem;
-      padding: 6px 12px;
-      background: rgba(128, 128, 128, 0.1);
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      display: inline-block;
-      transition: all 0.3s ease;
-      cursor: default;
-    }
-    
-    /* EFEITO HOVER (Ao passar o mouse) */
-    .skill-badge:hover {
-      border-color: var(--accent);
-      color: var(--text-main);
-      box-shadow: 0 0 10px var(--accent-glow);
-      transform: translateY(-2px);
-    }
-
-    .nav-blur {
-      background: var(--bg-glass);
-      backdrop-filter: blur(15px);
-      border-bottom: 1px solid var(--border);
-    }
-    
-    .success-message {
-      background: rgba(46, 125, 50, 0.1);
-      border: 1px solid var(--success);
-      color: var(--success);
-      padding: 1rem;
-      margin-top: 1rem;
-      font-family: var(--font-code);
-      font-size: 0.9rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      animation: fadeIn 0.5s ease;
-    }
-    .error-message {
-      background: rgba(198, 40, 40, 0.1);
-      border: 1px solid var(--error);
-      color: var(--error);
-      padding: 1rem;
-      margin-top: 1rem;
-      font-family: var(--font-code);
-      font-size: 0.9rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      animation: fadeIn 0.5s ease;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    footer {
-      background-color: var(--bg-footer);
-      border-top: 1px solid var(--border);
     }
   `;
 
@@ -387,127 +293,27 @@ const App = () => {
       {/* --- NAVBAR --- */}
       <nav className="nav-blur fixed-top py-3">
         <div className="container d-flex justify-content-between align-items-center">
-          <div className="d-flex align-items-center gap-2">
-            <span className="font-display fw-bold" style={{fontSize: '1.4rem', letterSpacing: '0.5px'}}>
-              Isabella Dev<span className="text-accent">.</span>
-            </span>
-          </div>
-          
+          <span className="font-display fw-bold" style={{fontSize: '1.4rem'}}>Isabella Dev<span className="text-accent">.</span></span>
           <div className="d-flex align-items-center gap-4">
             <button onClick={toggleTheme} className="btn p-0 border-0 text-accent">
               {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
             </button>
             <button onClick={toggleLang} className="btn p-0 border-0 d-flex align-items-center gap-2" style={{color: 'var(--text-main)'}}>
-              <Globe size={18} />
-              <span className="font-code small">{lang.toUpperCase()}</span>
+              <Globe size={18} /> <span className="font-code small">{lang.toUpperCase()}</span>
             </button>
           </div>
         </div>
       </nav>
 
-      {/* --- HERO SECTION --- */}
+      {/* --- HERO --- */}
       <section className="min-vh-100 d-flex align-items-center pt-5">
-        <div className="container">
-          <div className="row align-items-center">
-            <div className="col-lg-8 animate-up">
-              <div className="d-inline-block px-3 py-1 mb-4 border border-secondary rounded-pill">
-                <small className="font-code text-accent">{t.hero.role}</small>
-              </div>
-              <h1 className="display-1 mb-4" style={{fontSize: 'clamp(3rem, 6vw, 5.5rem)', lineHeight: '1.1'}}>
-                {t.hero.title}
-              </h1>
-              <p className="lead text-muted-custom mb-5" style={{maxWidth: '650px'}}>
-                {t.hero.subtitle}
-              </p>
-              
-              <div className="d-flex flex-wrap gap-3 align-items-center mb-5">
-                <a href="#projects" className="btn-goth">{t.hero.btnProject}</a>
-                <div className="d-flex align-items-center gap-2 ms-md-4 text-muted-custom font-code small">
-                  <MapPin size={16} className="text-accent" /> {t.hero.location}
-                </div>
-              </div>
-
-              <div className="d-flex gap-4">
-                <a href={linkedinUrl} target="_blank" rel="noreferrer" className="text-muted-custom hover-accent"><Linkedin size={24}/></a>
-                <a href="https://github.com/isabelladosanjos" target="_blank" rel="noreferrer" className="text-muted-custom hover-accent"><Github size={24}/></a>
-                <a href={emailUrl} className="text-muted-custom hover-accent"><Mail size={24}/></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* --- ABOUT & SKILLS (Formatado) --- */}
-      <section id="about" className="py-5">
-        <div className="container py-5">
-          <div className="row g-5 align-items-center">
-            <div className="col-lg-6">
-              <h2 className="mb-5 display-5">{t.about.title}</h2>
-              
-              {/* Texto com Espaçamento Estruturado (Editorial Look) */}
-              <div style={{ paddingRight: '1rem' }}>
-                <p className="text-muted-custom mb-4" style={{
-                  fontSize: '1.15rem', 
-                  lineHeight: '1.9', 
-                  marginBottom: '2rem'
-                }}>
-                  {t.about.desc1}
-                </p>
-                <p className="text-muted-custom" style={{
-                  fontSize: '1.15rem', 
-                  lineHeight: '1.9'
-                }}>
-                  {t.about.desc2}
-                </p>
-              </div>
-            </div>
-            
-            {/* Skills */}
-            <div className="col-lg-5 offset-lg-1">
-              <h3 className="h5 mb-5 font-code text-accent">&lt; {t.about.skillsTitle} /&gt;</h3>
-              
-              <div className="row g-4">
-                <div className="col-12">
-                  <div className="skill-category">
-                    <h4 className="h6 mb-3 d-flex align-items-center gap-2">
-                      <Server size={18} className="text-accent"/> {t.skills.cat1}
-                    </h4>
-                    <div className="d-flex flex-wrap gap-2">
-                      {['Python', 'Node.js', 'API REST', 'MVC Pattern', 'Security'].map(s => (
-                        <span key={s} className="skill-badge">{s}</span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="col-12">
-                  <div className="skill-category">
-                    <h4 className="h6 mb-3 d-flex align-items-center gap-2">
-                      <Database size={18} className="text-accent"/> {t.skills.cat2}
-                    </h4>
-                    <div className="d-flex flex-wrap gap-2">
-                      {['MySQL', 'PostgreSQL', 'Data Modeling', 'SQL Optimization'].map(s => (
-                        <span key={s} className="skill-badge">{s}</span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="col-12">
-                  <div className="skill-category">
-                    <h4 className="h6 mb-3 d-flex align-items-center gap-2">
-                      <Users size={18} className="text-accent"/> {t.skills.cat5}
-                    </h4>
-                    <div className="d-flex flex-wrap gap-2">
-                      {softSkillsList.map(s => (
-                        <span key={s} className="skill-badge">{s}</span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
+        <div className="container text-center text-lg-start">
+          <div className="d-inline-block px-3 py-1 mb-4 border border-secondary rounded-pill font-code text-accent small">{t.hero.role}</div>
+          <h1 className="display-1 mb-4" style={{fontFamily: 'var(--font-display)'}}>{t.hero.title}</h1>
+          <p className="lead text-muted-custom mb-5" style={{maxWidth: '650px'}}>{t.hero.subtitle}</p>
+          <div className="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
+            <a href="#projects" className="btn-goth">{t.hero.btnProject}</a>
+            <div className="d-flex align-items-center gap-2 text-muted-custom font-code small"><MapPin size={16} className="text-accent" /> {t.hero.location}</div>
           </div>
         </div>
       </section>
@@ -515,142 +321,96 @@ const App = () => {
       {/* --- PROJECTS --- */}
       <section id="projects" className="py-5" style={{background: 'linear-gradient(to bottom, var(--bg-body), var(--bg-card))'}}>
         <div className="container py-5">
-          <h2 className="display-4 mb-5 text-center">{t.projects.title}</h2>
-
+          <h2 className="display-4 mb-5 text-center font-display">{t.projects.title}</h2>
           <div className="row g-4">
-            {/* Belle Time */}
-            <div className="col-md-6">
+            
+            {/* 1. Belle Time */}
+            <div className="col-md-6 col-lg-4">
               <div className="glass-card d-flex flex-column">
                 <div className="d-flex justify-content-between align-items-start mb-4">
-                  <div className="p-3 rounded-circle" style={{background: 'var(--bg-body)', border: '1px solid var(--border)'}}>
-                    <ShieldCheck size={28} className="text-accent" />
-                  </div>
-                  <ExternalLink size={20} className="text-muted-custom" />
+                  <div className="p-3 rounded-circle border border-danger"><ShieldCheck size={28} className="text-accent" /></div>
                 </div>
-                <span className="font-code text-accent small mb-2 d-block">{t.projects.desktopCat}</span>
+                <span className="font-code text-accent small mb-2">{t.projects.desktopCat}</span>
                 <h3 className="h4 mb-3">{t.projects.p1_title}</h3>
                 <p className="text-muted-custom mb-4 small flex-grow-1">{t.projects.p1_desc}</p>
-                <div className="mb-4 pt-3 border-top" style={{borderColor: 'var(--border)'}}>
-                  <p className="font-code small text-uppercase mb-1 text-muted-custom" style={{fontSize: '0.7rem'}}>Role:</p>
-                  <p className="mb-0 fw-bold small">{t.projects.p1_role}</p>
-                </div>
                 <div className="d-flex flex-wrap gap-2 mb-4">
-                  {t.projects.p1_tech.map(tech => (
-                    <span key={tech} className="small font-code px-2 py-1" style={{background: 'rgba(155, 34, 66, 0.1)', color: 'var(--accent)'}}>
-                      {tech}
-                    </span>
-                  ))}
+                  {t.projects.p1_tech.map(tech => <span key={tech} className="skill-badge">{tech}</span>)}
                 </div>
-                <div className="mt-auto">
-                   <a href={t.projects.p1_repo} target="_blank" rel="noreferrer" className="btn-goth w-100">
-                     <Github size={16} /> {t.projects.btnCode}
-                   </a>
+                <a href={t.projects.p1_repo} target="_blank" rel="noreferrer" className="btn-goth w-100"><Github size={16} /> {t.projects.btnCode}</a>
+              </div>
+            </div>
+
+            {/* 2. Symphony IA */}
+            <div className="col-md-6 col-lg-4">
+              <div className="glass-card d-flex flex-column">
+                <div className="d-flex justify-content-between align-items-start mb-4">
+                  <div className="p-3 rounded-circle border border-danger"><Music size={28} className="text-accent" /></div>
+                </div>
+                <span className="font-code text-accent small mb-2">{t.projects.aiCat}</span>
+                <h3 className="h4 mb-3">{t.projects.p2_title}</h3>
+                <p className="text-muted-custom mb-4 small flex-grow-1">{t.projects.p2_desc}</p>
+                <div className="d-flex flex-wrap gap-2 mb-4">
+                  {t.projects.p2_tech.map(tech => <span key={tech} className="skill-badge">{tech}</span>)}
+                </div>
+                <div className="d-flex gap-2">
+                  <a href={t.projects.p2_repo} target="_blank" rel="noreferrer" className="btn-goth flex-grow-1"><Github size={16} /></a>
+                  <a href={t.projects.p2_live} target="_blank" rel="noreferrer" className="btn-goth flex-grow-1" style={{background: 'var(--accent)', color: '#fff'}}>{t.projects.btnLive}</a>
                 </div>
               </div>
             </div>
 
-            {/* Symphony IA */}
-            <div className="col-md-6">
+            {/* 3. Robson Pinturas (NOVO - ESTILO LEGADO) */}
+            <div className="col-md-6 col-lg-4">
               <div className="glass-card d-flex flex-column">
                 <div className="d-flex justify-content-between align-items-start mb-4">
-                  <div className="p-3 rounded-circle" style={{background: 'var(--bg-body)', border: '1px solid var(--border)'}}>
-                    <Music size={28} className="text-accent" />
-                  </div>
-                  <ExternalLink size={20} className="text-muted-custom" />
+                  <div className="p-3 rounded-circle border border-danger"><Layers size={28} className="text-accent" /></div>
+                  <span className="badge border border-secondary text-muted-custom font-code" style={{fontSize: '0.6rem'}}>2024</span>
                 </div>
-                <span className="font-code text-accent small mb-2 d-block">{t.projects.aiCat}</span>
-                <h3 className="h4 mb-3">{t.projects.p2_title}</h3>
-                <p className="text-muted-custom mb-4 small flex-grow-1">{t.projects.p2_desc}</p>
-                <div className="mb-4 pt-3 border-top" style={{borderColor: 'var(--border)'}}>
-                   <p className="font-code small text-uppercase mb-1 text-muted-custom" style={{fontSize: '0.7rem'}}>Role:</p>
-                   <p className="mb-0 fw-bold small">{t.projects.p2_role}</p>
-                </div>
+                <span className="font-code text-accent small mb-2">{t.projects.webCat}</span>
+                <h3 className="h4 mb-3">{t.projects.p3_title}</h3>
+                <p className="text-muted-custom mb-4 small flex-grow-1">{t.projects.p3_desc}</p>
                 <div className="d-flex flex-wrap gap-2 mb-4">
-                  {t.projects.p2_tech.map(tech => (
-                    <span key={tech} className="small font-code px-2 py-1" style={{background: 'rgba(155, 34, 66, 0.1)', color: 'var(--accent)'}}>
-                      {tech}
-                    </span>
-                  ))}
+                  {t.projects.p3_tech.map(tech => <span key={tech} className="skill-badge">{tech}</span>)}
                 </div>
-                <div className="mt-auto d-flex gap-2">
-                   <a href={t.projects.p2_repo} target="_blank" rel="noreferrer" className="btn-goth flex-grow-1">
-                     <Github size={16} /> {t.projects.btnCode}
-                   </a>
-                   <a href={t.projects.p2_live} target="_blank" rel="noreferrer" className="btn-goth btn-goth-fill flex-grow-1">
-                     <ExternalLink size={16} /> {t.projects.btnLive}
-                   </a>
+                <div className="text-center p-2 font-code small border border-dashed text-muted-custom">
+                   {t.projects.btnLegacy}
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </section>
 
       {/* --- CONTACT --- */}
       <section id="contact" className="py-5">
-        <div className="container py-5">
-          <div className="row justify-content-center">
-            <div className="col-lg-6 text-center">
-              <h2 className="mb-3 font-display">{t.contact.title}</h2>
-              <p className="text-muted-custom mb-5">{t.contact.desc}</p>
-              
-              <form ref={form} className="text-start" onSubmit={sendEmail}>
-                <div className="row g-4">
-                  <div className="col-md-6">
-                    <input type="text" name="name" className="input-underlined" placeholder={t.contact.placeholderName} required />
-                  </div>
-                  <div className="col-md-6">
-                    <input type="email" name="email" className="input-underlined" placeholder={t.contact.placeholderEmail} required />
-                  </div>
-                  <div className="col-12">
-                    <textarea name="message" className="input-underlined" rows="3" placeholder={t.contact.placeholderMsg} required></textarea>
-                  </div>
-                  <div className="col-12 text-center mt-4">
-                    <button type="submit" className="btn-goth w-100 py-3" disabled={formStatus === 'sending' || formStatus === 'success'}>
-                      {formStatus === 'sending' ? (<span>{t.contact.sending}</span>) : (<>{t.contact.btn} <Send size={16} /></>)}
-                    </button>
-                    {formStatus === 'success' && (<div className="success-message animate-up"><CheckCircle size={18} /> {t.contact.success}</div>)}
-                    {formStatus === 'error' && (<div className="error-message animate-up"><AlertCircle size={18} /> {t.contact.error}</div>)}
-                  </div>
-                </div>
+        <div className="container py-5 text-center">
+          <h2 className="mb-5 font-display display-5">{t.contact.title}</h2>
+          <div className="row justify-content-center text-start">
+            <div className="col-lg-6">
+              <form ref={form} onSubmit={sendEmail}>
+                <input type="text" name="name" className="input-underlined mb-4" placeholder={t.contact.placeholderName} required />
+                <input type="email" name="email" className="input-underlined mb-4" placeholder={t.contact.placeholderEmail} required />
+                <textarea name="message" className="input-underlined mb-4" rows="3" placeholder={t.contact.placeholderMsg} required></textarea>
+                <button type="submit" className="btn-goth w-100 py-3" disabled={formStatus !== 'idle'}>
+                  {formStatus === 'sending' ? t.contact.sending : <>{t.contact.btn} <Send size={16} /></>}
+                </button>
+                {formStatus === 'success' && <div className="text-success mt-3 font-code">{t.contact.success}</div>}
               </form>
             </div>
           </div>
         </div>
       </section>
 
-      {/* --- FOOTER (Sem borda) --- */}
-      <footer className="py-5 mt-5">
-        <div className="container">
-          <div className="row g-4 mb-5">
-            <div className="col-md-4">
-              <div className="d-flex align-items-center gap-2 mb-3">
-                <Sparkles size={18} className="text-accent" />
-                <span className="font-display fw-bold" style={{fontSize: '1.2rem'}}>ISABELLA.DEV</span>
-              </div>
-              <p className="text-muted-custom small mb-0">{t.footer.tagline}</p>
-            </div>
-            <div className="col-md-2 offset-md-2">
-              <h5 className="h6 mb-3 font-code text-accent">{t.footer.links}</h5>
-              <ul className="list-unstyled small">
-                <li className="mb-2"><a href="#about" className="text-decoration-none text-muted-custom hover-white">Sobre</a></li>
-                <li className="mb-2"><a href="#projects" className="text-decoration-none text-muted-custom hover-white">Projetos</a></li>
-                <li className="mb-2"><a href="#contact" className="text-decoration-none text-muted-custom hover-white">Contato</a></li>
-              </ul>
-            </div>
-            <div className="col-md-3 offset-md-1">
-              <h5 className="h6 mb-3 font-code text-accent">{t.footer.social}</h5>
-              <div className="d-flex gap-3">
-                <a href={linkedinUrl} target="_blank" rel="noreferrer" className="text-muted-custom hover-accent"><Linkedin size={20}/></a>
-                <a href="https://github.com/isabelladosanjos" target="_blank" rel="noreferrer" className="text-muted-custom hover-accent"><Github size={20}/></a>
-                <a href={emailUrl} className="text-muted-custom hover-accent"><Mail size={20}/></a>
-              </div>
-            </div>
+      {/* --- FOOTER --- */}
+      <footer className="py-5 border-top border-secondary mt-5">
+        <div className="container text-center">
+          <div className="d-flex gap-4 justify-content-center mb-4">
+            <a href={linkedinUrl} target="_blank" rel="noreferrer" className="text-muted-custom"><Linkedin /></a>
+            <a href="https://github.com/isabelladosanjos" target="_blank" rel="noreferrer" className="text-muted-custom"><Github /></a>
+            <a href={emailUrl} className="text-muted-custom"><Mail /></a>
           </div>
-          {/* DIV DE COPYRIGHT SEM BORDA */}
-          <div className="pt-4 text-center">
-            <p className="small text-muted-custom mb-0 font-code opacity-50">{t.footer.copy}</p>
-          </div>
+          <p className="small text-muted-custom font-code">{t.footer.copy}</p>
         </div>
       </footer>
     </>
