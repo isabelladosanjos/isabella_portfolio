@@ -13,9 +13,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const content = {
   pt: {
     hero: {
-      role: 'Back-end Developer & AI Enthusiast',
+      role: 'Developer & AI Enthusiast',
       title: 'Código com Alma & Lógica',
-      subtitle: 'Desenvolvedora apaixonada por arquitetura de software, automação e inteligência artificial. Transformo regras de negócio complexas em sistemas elegantes e escaláveis.',
+      subtitle: 'Desenvolvedora apaixonada por arquitetura de software, automação e inteligência artificial. Transformo regras de negócio complexas em sistemas elegantes e eficientes.',
       location: 'Sorocaba, SP',
       btnProject: 'Ver Portfolio',
       btnContact: 'Entrar em Contato'
