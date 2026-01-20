@@ -6,7 +6,7 @@ import {
   MapPin, ExternalLink, Music, Sparkles, 
   ArrowRight, Box, ShieldCheck, Workflow, CheckCircle, 
   Send, AlertCircle, Users, Brain, Clock, Layers,
-  FileText // Importei o ícone novo para o currículo
+  FileText 
 } from 'lucide-react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -19,7 +19,7 @@ const content = {
       location: 'Sorocaba, SP',
       btnProject: 'Ver Portfolio',
       btnContact: 'Entrar em Contato',
-      btnCV: 'Baixar CV' // Novo texto
+      btnCV: 'Baixar CV' 
     },
     about: {
       title: 'A Arquiteta por trás do Código',
@@ -235,9 +235,7 @@ const App = () => {
           
           <div className="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
             <a href="#projects" className="btn-goth">{t.hero.btnProject}</a>
-            
-            {/* NOVO BOTÃO DE DOWNLOAD DO CV */}
-            {/* O atributo 'download' faz o navegador baixar o arquivo em vez de abrir */}
+
             <a href="/Curriculo_IsabellaDosAnjos.pdf" download="Currículo_Isabella_Dos_Anjos.pdf" className="btn-goth d-flex align-items-center gap-2" style={{borderColor: 'var(--text-muted)'}}>
               <FileText size={18} /> {t.hero.btnCV}
             </a>
