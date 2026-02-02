@@ -236,7 +236,7 @@ const App = () => {
           <div className="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
             <a href="#projects" className="btn-goth">{t.hero.btnProject}</a>
 
-            <a href="/Curriculo_IsabellaDosAnjos.pdf" download="Currículo_Isabella_Dos_Anjos.pdf" className="btn-goth d-flex align-items-center gap-2" style={{borderColor: 'var(--text-muted)'}}>
+            <a href="/Curriculo_IsabellaScarassati.pdf" download="Currículo_Isabella_Dos_Anjos.pdf" className="btn-goth d-flex align-items-center gap-2" style={{borderColor: 'var(--text-muted)'}}>
               <FileText size={18} /> {t.hero.btnCV}
             </a>
             
