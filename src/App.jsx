@@ -6,7 +6,7 @@ import {
   MapPin, ExternalLink, Music, Sparkles, 
   ArrowRight, Box, ShieldCheck, Workflow, CheckCircle, 
   Send, AlertCircle, Users, Brain, Clock, Layers,
-  FileText 
+  FileText, ShieldAlert
 } from 'lucide-react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -30,29 +30,36 @@ const content = {
     skills: {
       cat1: 'Back-end & Arquitetura',
       cat2: 'Banco de Dados',
+      cat3: 'Segurança & Infra',
       cat4: 'Frontend & UI',
       cat5: 'Soft Skills'
     },
     projects: {
       title: 'Projetos em Destaque',
-      desktopCat: 'Desktop Engineering',
-      aiCat: 'AI & Web Solutions',
-      webCat: 'Web Development & Leadership',
       btnCode: 'Ver Código',
       btnLive: 'Testar Online',
       btnLegacy: 'Projeto Concluído (2024)',
+      
       p1_title: 'Belle Time - Studio System',
       p1_desc: 'Sistema de gestão completo para salões de beleza. Gerencia agendamentos e base de clientes com integridade de dados rigorosa.',
       p1_tech: ['Python', 'MySQL', 'PySide6', 'VirtualBox'],
       p1_repo: 'https://github.com/isabelladosanjos/BelleTime_Agenda',
+
       p2_title: 'Symphony IA - Music Agent',
       p2_desc: 'Agente inteligente que recomenda playlists musicais personalizadas utilizando a API do Groq.',
       p2_tech: ['Python', 'Groq API', 'Streamlit', 'LLM Engineering'],
       p2_repo: 'https://github.com/isabelladosanjos/SymphonyIA_ProjetoADS',
       p2_live: 'https://symphonyiaprojetoads-5dfiru6tjoubjst8kvsabn.streamlit.app/',
+
       p3_title: 'Robson Pinturas - Digital Presence',
       p3_desc: 'Liderança técnica no desenvolvimento de uma plataforma mobile-first com integração de WhatsApp e Google OAuth.',
       p3_tech: ['JavaScript', 'Bootstrap', 'WhatsApp API', 'OAuth 2.0'],
+
+      p4_title: 'Umbra Sentinel - Security Audit',
+      p4_desc: 'Ecossistema Full Stack de monitoramento e auditoria de logs. Implementa lógica de Honey Pot para detecção e rotulagem de acessos sensíveis em tempo real.',
+      p4_tech: ['Node.js', 'MySQL', 'Railway', 'Honey Pot'],
+      p4_repo: 'https://github.com/isabelladosanjos/umbra-sentinel',
+      p4_live: 'https://umbra-sentinel.vercel.app'
     },
     contact: {
       title: 'Vamos criar algo incrível?',
@@ -77,7 +84,7 @@ const content = {
       location: 'Sorocaba, Brazil',
       btnProject: 'View Portfolio',
       btnContact: 'Get in Touch',
-      btnCV: 'Download CV' // Novo texto EN
+      btnCV: 'Download CV'
     },
     about: {
       title: 'The Architect Behind the Code',
@@ -88,29 +95,36 @@ const content = {
     skills: {
       cat1: 'Back-end & Architecture',
       cat2: 'Database',
+      cat3: 'Security & Infra',
       cat4: 'Frontend & UI',
       cat5: 'Soft Skills'
     },
     projects: {
       title: 'Featured Projects',
-      desktopCat: 'Desktop Engineering',
-      aiCat: 'AI & Web Solutions',
-      webCat: 'Web Development & Leadership',
       btnCode: 'View Code',
       btnLive: 'Live Demo',
       btnLegacy: 'Completed Project (2024)',
+      
       p1_title: 'Belle Time - Studio System',
       p1_desc: 'Complete management system for beauty salons. Manages scheduling and client base with strict data integrity.',
       p1_tech: ['Python', 'MySQL', 'PySide6', 'VirtualBox'],
       p1_repo: 'https://github.com/isabelladosanjos/BelleTime_Agenda',
+
       p2_title: 'Symphony IA - Music Agent',
       p2_desc: 'Intelligent agent that recommends personalized music playlists using the Groq API.',
       p2_tech: ['Python', 'Groq API', 'Streamlit', 'LLM Engineering'],
       p2_repo: 'https://github.com/isabelladosanjos/SymphonyIA_ProjetoADS',
       p2_live: 'https://symphonyiaprojetoads-5dfiru6tjoubjst8kvsabn.streamlit.app/',
+
       p3_title: 'Robson Pinturas - Digital Presence',
       p3_desc: 'Technical leadership in developing a mobile-first platform with WhatsApp integration and Google OAuth.',
       p3_tech: ['JavaScript', 'Bootstrap', 'WhatsApp API', 'OAuth 2.0'],
+
+      p4_title: 'Umbra Sentinel - Security Audit',
+      p4_desc: 'Full Stack logging and audit ecosystem. Features Honey Pot logic to detect and label sensitive access attempts in real-time.',
+      p4_tech: ['Node.js', 'MySQL', 'Railway', 'Honey Pot'],
+      p4_repo: 'https://github.com/isabelladosanjos/umbra-sentinel',
+      p4_live: 'https://umbra-sentinel.vercel.app'
     },
     contact: {
       title: 'Let\'s build something amazing?',
@@ -182,7 +196,6 @@ const App = () => {
     
     .nav-blur { background: rgba(20, 10, 15, 0.7); backdrop-filter: blur(15px); border-bottom: 1px solid var(--border); }
     
-    /* ESTILO NOVO DAS SKILLS */
     .skill-badge { 
       font-family: var(--font-code); 
       font-size: 0.85rem; 
@@ -195,7 +208,6 @@ const App = () => {
       transition: all 0.3s ease;
       cursor: default;
     }
-    /* Efeito de hover "vivido" */
     .skill-badge:hover {
       background-color: var(--accent);
       color: #fff !important;
@@ -206,7 +218,6 @@ const App = () => {
 
     .skill-category { border-left: 2px solid var(--border); padding-left: 1.5rem; margin-bottom: 2rem; }
     .text-accent { color: var(--accent) !important; }
-    .text-muted-custom { color: var(--text-muted) !important; }
     .font-code { font-family: var(--font-code); }
     .input-underlined { background: transparent; border: none; border-bottom: 1px solid var(--border); color: var(--text-main); padding: 15px 0; width: 100%; outline: none; }
   `;
@@ -227,6 +238,7 @@ const App = () => {
         </div>
       </nav>
 
+      {/* Hero Section */}
       <section className="min-vh-100 d-flex align-items-center pt-5">
         <div className="container text-center text-lg-start">
           <div className="d-inline-block px-3 py-1 mb-4 border border-secondary rounded-pill font-code text-accent small">{t.hero.role}</div>
@@ -235,18 +247,17 @@ const App = () => {
           
           <div className="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
             <a href="#projects" className="btn-goth">{t.hero.btnProject}</a>
-
-            <a href="/Curriculo_IsabellaScarassati.pdf" download="Currículo_Isabella_Dos_Anjos.pdf" className="btn-goth d-flex align-items-center gap-2" style={{borderColor: 'var(--text-muted)'}}>
+            <a href="/Curriculo_IsabellaScarassati.pdf" download className="btn-goth d-flex align-items-center gap-2" style={{borderColor: 'var(--text-muted)'}}>
               <FileText size={18} /> {t.hero.btnCV}
             </a>
-            
           </div>
-            <div className="mt-4 d-flex align-items-center gap-2 text-muted-custom font-code small justify-content-center justify-content-lg-start">
-                <MapPin size={16} className="text-accent" /> {t.hero.location}
-            </div>
+          <div className="mt-4 d-flex align-items-center gap-2 text-muted-custom font-code small justify-content-center justify-content-lg-start">
+            <MapPin size={16} className="text-accent" /> {t.hero.location}
+          </div>
         </div>
       </section>
 
+      {/* About Section */}
       <section id="about" className="py-5">
         <div className="container py-5">
           <div className="row g-5">
@@ -262,49 +273,77 @@ const App = () => {
                 {['Python', 'Node.js', 'API REST', 'MVC', 'SQL'].map(s => <span key={s} className="skill-badge">{s}</span>)}
               </div>
               <div className="skill-category">
-                <h4 className="h6 mb-3 d-flex align-items-center gap-2"><Layout size={18} className="text-accent"/> {t.skills.cat4}</h4>
-                {['React.js', 'JavaScript', 'HTML5/CSS3', 'Bootstrap'].map(s => <span key={s} className="skill-badge">{s}</span>)}
+                <h4 className="h6 mb-3 d-flex align-items-center gap-2"><ShieldAlert size={18} className="text-accent"/> {t.skills.cat3}</h4>
+                {['Cybersecurity', 'Honey Pot', 'Cloud Infrastructure', 'Vercel', 'Railway'].map(s => <span key={s} className="skill-badge">{s}</span>)}
               </div>
               <div className="skill-category">
-                <h4 className="h6 mb-3 d-flex align-items-center gap-2"><Users size={18} className="text-accent"/> {t.skills.cat5}</h4>
-                {softSkillsList.map(s => <span key={s} className="skill-badge">{s}</span>)}
+                <h4 className="h6 mb-3 d-flex align-items-center gap-2"><Layout size={18} className="text-accent"/> {t.skills.cat4}</h4>
+                {['React.js', 'JavaScript', 'HTML5/CSS3', 'Bootstrap'].map(s => <span key={s} className="skill-badge">{s}</span>)}
               </div>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Projects Section */}
       <section id="projects" className="py-5" style={{background: 'linear-gradient(to bottom, var(--bg-body), var(--bg-card))'}}>
         <div className="container py-5">
           <h2 className="display-4 mb-5 text-center font-display">{t.projects.title}</h2>
           <div className="row g-4">
-            <div className="col-md-6 col-lg-4">
-              <div className="glass-card d-flex flex-column">
-                <ShieldCheck size={28} className="text-accent mb-4" />
-                <h3 className="h4 mb-3">{t.projects.p1_title}</h3>
-                <p className="text-muted-custom mb-4 small flex-grow-1">{t.projects.p1_desc}</p>
-                <div className="mb-4">{t.projects.p1_tech.map(tech => <span key={tech} className="skill-badge">{tech}</span>)}</div>
-                <a href={t.projects.p1_repo} target="_blank" rel="noreferrer" className="btn-goth w-100 text-center"><Github size={16} /> {t.projects.btnCode}</a>
+            {/* Umbra Sentinel - New Strategic Project */}
+            <div className="col-md-6">
+              <div className="glass-card d-flex flex-column" style={{borderColor: 'var(--accent)'}}>
+                <Terminal size={28} className="text-accent mb-4" />
+                <h3 className="h4 mb-3">{t.projects.p4_title}</h3>
+                <p className="text-muted-custom mb-4 small flex-grow-1">{t.projects.p4_desc}</p>
+                <div className="mb-4">
+                  {t.projects.p4_tech.map(tech => <span key={tech} className="skill-badge">{tech}</span>)}
+                </div>
+                <div className="d-flex gap-2">
+                  <a href={t.projects.p4_repo} target="_blank" rel="noreferrer" className="btn-goth flex-grow-1 text-center"><Github size={16} /> {t.projects.btnCode}</a>
+                  <a href={t.projects.p4_live} target="_blank" rel="noreferrer" className="btn-goth flex-grow-1 text-center" style={{background: 'var(--accent)', color: '#fff'}}>{t.projects.btnLive}</a>
+                </div>
               </div>
             </div>
-            <div className="col-md-6 col-lg-4">
+
+            {/* Symphony IA */}
+            <div className="col-md-6">
               <div className="glass-card d-flex flex-column">
                 <Music size={28} className="text-accent mb-4" />
                 <h3 className="h4 mb-3">{t.projects.p2_title}</h3>
                 <p className="text-muted-custom mb-4 small flex-grow-1">{t.projects.p2_desc}</p>
-                <div className="mb-4">{t.projects.p2_tech.map(tech => <span key={tech} className="skill-badge">{tech}</span>)}</div>
+                <div className="mb-4">
+                  {t.projects.p2_tech.map(tech => <span key={tech} className="skill-badge">{tech}</span>)}
+                </div>
                 <div className="d-flex gap-2">
                   <a href={t.projects.p2_repo} target="_blank" rel="noreferrer" className="btn-goth flex-grow-1 text-center"><Github size={16} /></a>
                   <a href={t.projects.p2_live} target="_blank" rel="noreferrer" className="btn-goth flex-grow-1 text-center" style={{background: 'var(--accent)', color: '#fff'}}>{t.projects.btnLive}</a>
                 </div>
               </div>
             </div>
-            <div className="col-md-6 col-lg-4">
+
+            {/* Belle Time */}
+            <div className="col-md-6">
+              <div className="glass-card d-flex flex-column">
+                <ShieldCheck size={28} className="text-accent mb-4" />
+                <h3 className="h4 mb-3">{t.projects.p1_title}</h3>
+                <p className="text-muted-custom mb-4 small flex-grow-1">{t.projects.p1_desc}</p>
+                <div className="mb-4">
+                  {t.projects.p1_tech.map(tech => <span key={tech} className="skill-badge">{tech}</span>)}
+                </div>
+                <a href={t.projects.p1_repo} target="_blank" rel="noreferrer" className="btn-goth w-100 text-center"><Github size={16} /> {t.projects.btnCode}</a>
+              </div>
+            </div>
+
+            {/* Robson Pinturas */}
+            <div className="col-md-6">
               <div className="glass-card d-flex flex-column">
                 <Layers size={28} className="text-accent mb-4" />
                 <h3 className="h4 mb-3">{t.projects.p3_title}</h3>
                 <p className="text-muted-custom mb-4 small flex-grow-1">{t.projects.p3_desc}</p>
-                <div className="mb-4">{t.projects.p3_tech.map(tech => <span key={tech} className="skill-badge">{tech}</span>)}</div>
+                <div className="mb-4">
+                  {t.projects.p3_tech.map(tech => <span key={tech} className="skill-badge">{tech}</span>)}
+                </div>
                 <div className="text-center p-2 font-code small border border-dashed text-muted-custom">{t.projects.btnLegacy}</div>
               </div>
             </div>
@@ -312,6 +351,7 @@ const App = () => {
         </div>
       </section>
 
+      {/* Contact Section */}
       <section id="contact" className="py-5">
         <div className="container py-5 text-center">
           <h2 className="mb-5 font-display display-5">{t.contact.title}</h2>
@@ -331,6 +371,7 @@ const App = () => {
         </div>
       </section>
 
+      {/* Footer */}
       <footer className="py-5 border-top border-secondary mt-5">
         <div className="container text-center text-muted-custom font-code small">
           <div className="d-flex gap-4 justify-content-center mb-4">
