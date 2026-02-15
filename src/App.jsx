@@ -43,12 +43,12 @@ const content = {
       p1_title: 'Belle Time - Studio System',
       p1_desc: 'Sistema de gestão completo para salões de beleza. Gerencia agendamentos e base de clientes com integridade de dados rigorosa.',
       p1_tech: ['Python', 'MySQL', 'PySide6', 'VirtualBox'],
-      p1_repo: 'https://github.com/isabelladosanjos/BelleTime_Agenda',
+      p1_repo: 'https://github.com/isabellascarassatii/BelleTime_Agenda',
 
       p2_title: 'Symphony IA - Music Agent',
       p2_desc: 'Agente inteligente que recomenda playlists musicais personalizadas utilizando a API do Groq.',
       p2_tech: ['Python', 'Groq API', 'Streamlit', 'LLM Engineering'],
-      p2_repo: 'https://github.com/isabelladosanjos/SymphonyIA_ProjetoADS',
+      p2_repo: 'https://github.com/isabellascarassatii/SymphonyIA_ProjetoADS',
       p2_live: 'https://symphonyiaprojetoads-5dfiru6tjoubjst8kvsabn.streamlit.app/',
 
       p3_title: 'Robson Pinturas - Digital Presence',
@@ -58,7 +58,7 @@ const content = {
       p4_title: 'Umbra Sentinel - Security Audit',
       p4_desc: 'Ecossistema Full Stack de monitoramento e auditoria de logs. Implementa lógica de Honey Pot para detecção e rotulagem de acessos sensíveis em tempo real.',
       p4_tech: ['Node.js', 'MySQL', 'Railway', 'Honey Pot'],
-      p4_repo: 'https://github.com/isabelladosanjos/umbra-sentinel',
+      p4_repo: 'https://github.com/isabellascarassatii/umbra-sentinel',
       p4_live: 'https://umbra-sentinel.vercel.app'
     },
     contact: {
@@ -108,12 +108,12 @@ const content = {
       p1_title: 'Belle Time - Studio System',
       p1_desc: 'Complete management system for beauty salons. Manages scheduling and client base with strict data integrity.',
       p1_tech: ['Python', 'MySQL', 'PySide6', 'VirtualBox'],
-      p1_repo: 'https://github.com/isabelladosanjos/BelleTime_Agenda',
+      p1_repo: 'https://github.com/isabellascarassatii/BelleTime_Agenda',
 
       p2_title: 'Symphony IA - Music Agent',
       p2_desc: 'Intelligent agent that recommends personalized music playlists using the Groq API.',
       p2_tech: ['Python', 'Groq API', 'Streamlit', 'LLM Engineering'],
-      p2_repo: 'https://github.com/isabelladosanjos/SymphonyIA_ProjetoADS',
+      p2_repo: 'https://github.com/isabellascarassatii/SymphonyIA_ProjetoADS',
       p2_live: 'https://symphonyiaprojetoads-5dfiru6tjoubjst8kvsabn.streamlit.app/',
 
       p3_title: 'Robson Pinturas - Digital Presence',
@@ -238,7 +238,6 @@ const App = () => {
         </div>
       </nav>
 
-      {/* Hero Section */}
       <section className="min-vh-100 d-flex align-items-center pt-5">
         <div className="container text-center text-lg-start">
           <div className="d-inline-block px-3 py-1 mb-4 border border-secondary rounded-pill font-code text-accent small">{t.hero.role}</div>
@@ -257,7 +256,6 @@ const App = () => {
         </div>
       </section>
 
-      {/* About Section */}
       <section id="about" className="py-5">
         <div className="container py-5">
           <div className="row g-5">
@@ -285,12 +283,10 @@ const App = () => {
         </div>
       </section>
 
-      {/* Projects Section */}
       <section id="projects" className="py-5" style={{background: 'linear-gradient(to bottom, var(--bg-body), var(--bg-card))'}}>
         <div className="container py-5">
           <h2 className="display-4 mb-5 text-center font-display">{t.projects.title}</h2>
           <div className="row g-4">
-            {/* Umbra Sentinel - New Strategic Project */}
             <div className="col-md-6">
               <div className="glass-card d-flex flex-column" style={{borderColor: 'var(--accent)'}}>
                 <Terminal size={28} className="text-accent mb-4" />
@@ -306,7 +302,6 @@ const App = () => {
               </div>
             </div>
 
-            {/* Symphony IA */}
             <div className="col-md-6">
               <div className="glass-card d-flex flex-column">
                 <Music size={28} className="text-accent mb-4" />
@@ -316,13 +311,14 @@ const App = () => {
                   {t.projects.p2_tech.map(tech => <span key={tech} className="skill-badge">{tech}</span>)}
                 </div>
                 <div className="d-flex gap-2">
-                  <a href={t.projects.p2_repo} target="_blank" rel="noreferrer" className="btn-goth flex-grow-1 text-center"><Github size={16} /></a>
+                  <a href={t.projects.p2_repo} target="_blank" rel="noreferrer" className="btn-goth flex-grow-1 text-center">
+                    <Github size={16} /> {t.projects.btnCode}
+                  </a>
                   <a href={t.projects.p2_live} target="_blank" rel="noreferrer" className="btn-goth flex-grow-1 text-center" style={{background: 'var(--accent)', color: '#fff'}}>{t.projects.btnLive}</a>
                 </div>
               </div>
             </div>
 
-            {/* Belle Time */}
             <div className="col-md-6">
               <div className="glass-card d-flex flex-column">
                 <ShieldCheck size={28} className="text-accent mb-4" />
@@ -335,7 +331,6 @@ const App = () => {
               </div>
             </div>
 
-            {/* Robson Pinturas */}
             <div className="col-md-6">
               <div className="glass-card d-flex flex-column">
                 <Layers size={28} className="text-accent mb-4" />
@@ -351,7 +346,6 @@ const App = () => {
         </div>
       </section>
 
-      {/* Contact Section */}
       <section id="contact" className="py-5">
         <div className="container py-5 text-center">
           <h2 className="mb-5 font-display display-5">{t.contact.title}</h2>
@@ -371,12 +365,11 @@ const App = () => {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="py-5 border-top border-secondary mt-5">
         <div className="container text-center text-muted-custom font-code small">
           <div className="d-flex gap-4 justify-content-center mb-4">
             <a href="https://www.linkedin.com/in/isabella-dos-anjos/" target="_blank" rel="noreferrer" className="text-muted-custom"><Linkedin /></a>
-            <a href="https://github.com/isabelladosanjos" target="_blank" rel="noreferrer" className="text-muted-custom"><Github /></a>
+            <a href="https://github.com/isabellascarassatii" target="_blank" rel="noreferrer" className="text-muted-custom"><Github /></a>
             <a href="mailto:bellaadevs@gmail.com" className="text-muted-custom"><Mail /></a>
           </div>
           <p>{t.footer.copy}</p>
