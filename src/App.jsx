@@ -123,7 +123,7 @@ const content = {
       p4_title: 'Umbra Sentinel - Security Audit',
       p4_desc: 'Full Stack logging and audit ecosystem. Features Honey Pot logic to detect and label sensitive access attempts in real-time.',
       p4_tech: ['Node.js', 'MySQL', 'Railway', 'Honey Pot'],
-      p4_repo: 'https://github.com/isabelladosanjos/umbra-sentinel',
+      p4_repo: 'https://github.com/isabellascarassatii/umbra-sentinel',
       p4_live: 'https://umbra-sentinel.vercel.app'
     },
     contact: {
