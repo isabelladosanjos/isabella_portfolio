@@ -188,6 +188,10 @@ const App = () => {
     }
     body { background-color: var(--bg-body) !important; color: var(--text-main) !important; font-family: var(--font-body); transition: all 0.3s; }
     
+    /* CORREÇÃO DOS LINKS AZUIS */
+    a { color: inherit !important; text-decoration: none !important; transition: 0.3s; }
+    a:hover { color: var(--accent) !important; }
+
     .btn-goth { border: 1px solid var(--accent); color: var(--text-main); padding: 10px 24px; background: transparent; font-family: var(--font-code); text-decoration: none; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
     .btn-goth:hover { background: var(--accent); color: #fff !important; box-shadow: 0 0 15px rgba(155, 34, 66, 0.4); }
     
@@ -218,6 +222,7 @@ const App = () => {
 
     .skill-category { border-left: 2px solid var(--border); padding-left: 1.5rem; margin-bottom: 2rem; }
     .text-accent { color: var(--accent) !important; }
+    .text-muted-custom { color: var(--text-muted) !important; }
     .font-code { font-family: var(--font-code); }
     .input-underlined { background: transparent; border: none; border-bottom: 1px solid var(--border); color: var(--text-main); padding: 15px 0; width: 100%; outline: none; }
   `;
