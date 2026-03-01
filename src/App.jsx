@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import emailjs from '@emailjs/browser';
+import { motion } from 'framer-motion'; // Importação necessária
 import { 
   Database, Server, Layout, Cpu, Code2, Terminal, 
   Github, Linkedin, Mail, Globe, Moon, Sun, 
@@ -39,22 +40,18 @@ const content = {
       btnCode: 'Ver Código',
       btnLive: 'Testar Online',
       btnLegacy: 'Projeto Concluído (2024)',
-      
       p1_title: 'Belle Time - Studio System',
       p1_desc: 'Sistema de gestão completo para salões de beleza. Gerencia agendamentos e base de clientes com integridade de dados rigorosa.',
       p1_tech: ['Python', 'MySQL', 'PySide6', 'VirtualBox'],
       p1_repo: 'https://github.com/isabellascarassatii/BelleTime_Agenda',
-
       p2_title: 'Symphony IA - Music Agent',
       p2_desc: 'Agente inteligente que recomenda playlists musicais personalizadas utilizando a API do Groq.',
       p2_tech: ['Python', 'Groq API', 'Streamlit', 'LLM Engineering'],
       p2_repo: 'https://github.com/isabellascarassatii/SymphonyIA_ProjetoADS',
       p2_live: 'https://symphonyiaprojetoads-5dfiru6tjoubjst8kvsabn.streamlit.app/',
-
       p3_title: 'Robson Pinturas - Digital Presence',
       p3_desc: 'Liderança técnica no desenvolvimento de uma plataforma mobile-first com integração de WhatsApp e Google OAuth.',
       p3_tech: ['JavaScript', 'Bootstrap', 'WhatsApp API', 'OAuth 2.0'],
-
       p4_title: 'Umbra Sentinel - Security Audit',
       p4_desc: 'Ecossistema Full Stack de monitoramento e auditoria de logs. Implementa lógica de Honey Pot para detecção e rotulagem de acessos sensíveis em tempo real.',
       p4_tech: ['Node.js', 'MySQL', 'Railway', 'Honey Pot'],
@@ -104,22 +101,18 @@ const content = {
       btnCode: 'View Code',
       btnLive: 'Live Demo',
       btnLegacy: 'Completed Project (2024)',
-      
       p1_title: 'Belle Time - Studio System',
       p1_desc: 'Complete management system for beauty salons. Manages scheduling and client base with strict data integrity.',
       p1_tech: ['Python', 'MySQL', 'PySide6', 'VirtualBox'],
       p1_repo: 'https://github.com/isabellascarassatii/BelleTime_Agenda',
-
       p2_title: 'Symphony IA - Music Agent',
       p2_desc: 'Intelligent agent that recommends personalized music playlists using the Groq API.',
       p2_tech: ['Python', 'Groq API', 'Streamlit', 'LLM Engineering'],
       p2_repo: 'https://github.com/isabellascarassatii/SymphonyIA_ProjetoADS',
       p2_live: 'https://symphonyiaprojetoads-5dfiru6tjoubjst8kvsabn.streamlit.app/',
-
       p3_title: 'Robson Pinturas - Digital Presence',
       p3_desc: 'Technical leadership in developing a mobile-first platform with WhatsApp integration and Google OAuth.',
       p3_tech: ['JavaScript', 'Bootstrap', 'WhatsApp API', 'OAuth 2.0'],
-
       p4_title: 'Umbra Sentinel - Security Audit',
       p4_desc: 'Full Stack logging and audit ecosystem. Features Honey Pot logic to detect and label sensitive access attempts in real-time.',
       p4_tech: ['Node.js', 'MySQL', 'Railway', 'Honey Pot'],
@@ -177,54 +170,79 @@ const App = () => {
 
   const styles = `
     :root {
-      --bg-body: #0a0508; --bg-card: #140a0f; --text-main: #eaddcf; 
-      --text-muted: #9c8c94; --accent: #9b2242; --border: #3d1822;
+      --bg-body: #0a0508; --bg-card: rgba(20, 10, 15, 0.6); --text-main: #eaddcf; 
+      --text-muted: #9c8c94; --accent: #9b2242; --border: rgba(155, 34, 66, 0.2);
       --font-display: 'Playfair Display', serif; --font-body: 'Inter', sans-serif;
       --font-code: 'Fira Code', monospace;
     }
     [data-theme="light"] {
-      --bg-body: #fdfbf7; --bg-card: #ffffff; --text-main: #2b2124; 
-      --text-muted: #665a5d; --accent: #800020; --border: #e6dadd;
+      --bg-body: #fdfbf7; --bg-card: rgba(255, 255, 255, 0.8); --text-main: #2b2124; 
+      --text-muted: #665a5d; --accent: #800020; --border: rgba(128, 0, 32, 0.1);
     }
-    body { background-color: var(--bg-body) !important; color: var(--text-main) !important; font-family: var(--font-body); transition: all 0.3s; }
+    body { background-color: var(--bg-body) !important; color: var(--text-main) !important; font-family: var(--font-body); transition: all 0.3s; overflow-x: hidden; }
     
-    /* CORREÇÃO DOS LINKS AZUIS */
-    a { color: inherit !important; text-decoration: none !important; transition: 0.3s; }
-    a:hover { color: var(--accent) !important; }
+    .text-gradient {
+      background: linear-gradient(90deg, #fff, var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
 
-    .btn-goth { border: 1px solid var(--accent); color: var(--text-main); padding: 10px 24px; background: transparent; font-family: var(--font-code); text-decoration: none; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
-    .btn-goth:hover { background: var(--accent); color: #fff !important; box-shadow: 0 0 15px rgba(155, 34, 66, 0.4); }
+    .btn-goth { 
+      border: 1px solid var(--accent); 
+      color: var(--text-main); 
+      padding: 12px 28px; 
+      background: transparent; 
+      font-family: var(--font-code); 
+      border-radius: 50px; 
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-goth:hover { 
+      background: var(--accent); 
+      color: #fff !important; 
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(155, 34, 66, 0.4); 
+    }
     
-    .glass-card { background: var(--bg-card); border: 1px solid var(--border); padding: 2rem; border-radius: 4px; height: 100%; transition: 0.3s; }
-    .glass-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+    .glass-card { 
+      background: var(--bg-card); 
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border); 
+      padding: 2.5rem; 
+      border-radius: 20px; 
+      height: 100%; 
+      transition: all 0.4s ease; 
+    }
+    .glass-card:hover { 
+      transform: translateY(-10px); 
+      border-color: var(--accent);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    }
     
-    .nav-blur { background: rgba(20, 10, 15, 0.7); backdrop-filter: blur(15px); border-bottom: 1px solid var(--border); }
+    .nav-blur { background: rgba(10, 5, 8, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
     
     .skill-badge { 
       font-family: var(--font-code); 
       font-size: 0.85rem; 
-      padding: 6px 12px; 
-      background: rgba(128, 128, 128, 0.1); 
+      padding: 8px 16px; 
+      background: rgba(155, 34, 66, 0.05); 
       border: 1px solid var(--border); 
+      border-radius: 50px;
       color: var(--text-muted); 
-      margin: 0 5px 5px 0; 
-      display: inline-block;
-      transition: all 0.3s ease;
-      cursor: default;
+      margin: 0 8px 8px 0; 
+      transition: all 0.3s;
     }
     .skill-badge:hover {
-      background-color: var(--accent);
+      background: var(--accent);
       color: #fff !important;
-      border-color: var(--accent);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(155, 34, 66, 0.3);
+      transform: translateY(-3px) rotate(2deg);
     }
 
-    .skill-category { border-left: 2px solid var(--border); padding-left: 1.5rem; margin-bottom: 2rem; }
+    .skill-category { border-left: 1px solid var(--border); padding-left: 1.5rem; margin-bottom: 2.5rem; }
     .text-accent { color: var(--accent) !important; }
-    .text-muted-custom { color: var(--text-muted) !important; }
-    .font-code { font-family: var(--font-code); }
-    .input-underlined { background: transparent; border: none; border-bottom: 1px solid var(--border); color: var(--text-main); padding: 15px 0; width: 100%; outline: none; }
+    .input-underlined { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; color: var(--text-main); padding: 15px 20px; width: 100%; outline: none; transition: 0.3s; }
+    .input-underlined:focus { border-color: var(--accent); background: rgba(255,255,255,0.05); }
   `;
 
   return (
@@ -232,7 +250,7 @@ const App = () => {
       <style>{styles}</style>
       <nav className="nav-blur fixed-top py-3">
         <div className="container d-flex justify-content-between align-items-center">
-          <span className="font-display fw-bold" style={{fontSize: '1.4rem'}}>Isabella Dev<span className="text-accent">.</span></span>
+          <motion.span initial={{x: -20, opacity: 0}} animate={{x: 0, opacity: 1}} className="font-display fw-bold" style={{fontSize: '1.4rem'}}>Isabella Dev<span className="text-accent">.</span></motion.span>
           <div className="d-flex align-items-center gap-4">
             <button onClick={toggleTheme} className="btn p-0 border-0 text-accent">{theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}</button>
             <button onClick={toggleLang} className="btn p-0 border-0 d-flex align-items-center gap-2" style={{color: 'var(--text-main)'}}>
@@ -245,16 +263,16 @@ const App = () => {
 
       <section className="min-vh-100 d-flex align-items-center pt-5">
         <div className="container text-center text-lg-start">
-          <div className="d-inline-block px-3 py-1 mb-4 border border-secondary rounded-pill font-code text-accent small">{t.hero.role}</div>
-          <h1 className="display-1 mb-4" style={{fontFamily: 'var(--font-display)'}}>{t.hero.title}</h1>
-          <p className="lead text-muted-custom mb-5" style={{maxWidth: '650px'}}>{t.hero.subtitle}</p>
+          <motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{delay: 0.2}} className="d-inline-block px-3 py-1 mb-4 border border-secondary rounded-pill font-code text-accent small">{t.hero.role}</motion.div>
+          <motion.h1 initial={{y: 30, opacity: 0}} animate={{y: 0, opacity: 1}} transition={{duration: 0.8}} className="display-1 mb-4 fw-bold font-display"><span className="text-gradient">{t.hero.title}</span></motion.h1>
+          <motion.p initial={{y: 20, opacity: 0}} animate={{y: 0, opacity: 1}} transition={{delay: 0.4}} className="lead text-muted-custom mb-5" style={{maxWidth: '650px'}}>{t.hero.subtitle}</motion.p>
           
-          <div className="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
-            <a href="#projects" className="btn-goth">{t.hero.btnProject}</a>
-            <a href="/Curriculo_IsabellaScarassati.pdf" download className="btn-goth d-flex align-items-center gap-2" style={{borderColor: 'var(--text-muted)'}}>
+          <motion.div initial={{y: 20, opacity: 0}} animate={{y: 0, opacity: 1}} transition={{delay: 0.6}} className="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
+            <a href="#projects" className="btn-goth">{t.hero.btnProject} <ArrowRight size={18}/></a>
+            <a href="/Curriculo_IsabellaScarassati.pdf" download className="btn-goth" style={{borderColor: 'var(--text-muted)'}}>
               <FileText size={18} /> {t.hero.btnCV}
             </a>
-          </div>
+          </motion.div>
           <div className="mt-4 d-flex align-items-center gap-2 text-muted-custom font-code small justify-content-center justify-content-lg-start">
             <MapPin size={16} className="text-accent" /> {t.hero.location}
           </div>
@@ -264,12 +282,12 @@ const App = () => {
       <section id="about" className="py-5">
         <div className="container py-5">
           <div className="row g-5">
-            <div className="col-lg-6">
-              <h2 className="mb-5 display-5 font-display">{t.about.title}</h2>
+            <motion.div initial={{opacity: 0, x: -30}} whileInView={{opacity: 1, x: 0}} transition={{duration: 0.8}} viewport={{once: true}} className="col-lg-6">
+              <h2 className="mb-5 display-5 font-display fw-bold">{t.about.title}</h2>
               <p className="text-muted-custom mb-4" style={{fontSize: '1.1rem', lineHeight: '1.8'}}>{t.about.desc1}</p>
               <p className="text-muted-custom" style={{fontSize: '1.1rem', lineHeight: '1.8'}}>{t.about.desc2}</p>
-            </div>
-            <div className="col-lg-5 offset-lg-1">
+            </motion.div>
+            <motion.div initial={{opacity: 0, x: 30}} whileInView={{opacity: 1, x: 0}} transition={{duration: 0.8}} viewport={{once: true}} className="col-lg-5 offset-lg-1">
               <h3 className="h5 mb-5 font-code text-accent">&lt; {t.about.skillsTitle} /&gt;</h3>
               <div className="skill-category">
                 <h4 className="h6 mb-3 d-flex align-items-center gap-2"><Server size={18} className="text-accent"/> {t.skills.cat1}</h4>
@@ -277,93 +295,63 @@ const App = () => {
               </div>
               <div className="skill-category">
                 <h4 className="h6 mb-3 d-flex align-items-center gap-2"><ShieldAlert size={18} className="text-accent"/> {t.skills.cat3}</h4>
-                {['Cybersecurity', 'Honey Pot', 'Cloud Infrastructure', 'Vercel', 'Railway'].map(s => <span key={s} className="skill-badge">{s}</span>)}
+                {['Cybersecurity', 'Honey Pot', 'Vercel', 'Railway'].map(s => <span key={s} className="skill-badge">{s}</span>)}
               </div>
               <div className="skill-category">
                 <h4 className="h6 mb-3 d-flex align-items-center gap-2"><Layout size={18} className="text-accent"/> {t.skills.cat4}</h4>
                 {['React.js', 'JavaScript', 'HTML5/CSS3', 'Bootstrap'].map(s => <span key={s} className="skill-badge">{s}</span>)}
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      <section id="projects" className="py-5" style={{background: 'linear-gradient(to bottom, var(--bg-body), var(--bg-card))'}}>
+      <section id="projects" className="py-5">
         <div className="container py-5">
-          <h2 className="display-4 mb-5 text-center font-display">{t.projects.title}</h2>
+          <motion.h2 initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} viewport={{once: true}} className="display-4 mb-5 text-center font-display fw-bold">{t.projects.title}</motion.h2>
           <div className="row g-4">
-            <div className="col-md-6">
-              <div className="glass-card d-flex flex-column" style={{borderColor: 'var(--accent)'}}>
-                <Terminal size={28} className="text-accent mb-4" />
-                <h3 className="h4 mb-3">{t.projects.p4_title}</h3>
-                <p className="text-muted-custom mb-4 small flex-grow-1">{t.projects.p4_desc}</p>
-                <div className="mb-4">
-                  {t.projects.p4_tech.map(tech => <span key={tech} className="skill-badge">{tech}</span>)}
+            {[ 
+              { title: t.projects.p4_title, desc: t.projects.p4_desc, tech: t.projects.p4_tech, repo: t.projects.p4_repo, live: t.projects.p4_live, icon: <Terminal size={28}/> },
+              { title: t.projects.p2_title, desc: t.projects.p2_desc, tech: t.projects.p2_tech, repo: t.projects.p2_repo, live: t.projects.p2_live, icon: <Music size={28}/> },
+              { title: t.projects.p1_title, desc: t.projects.p1_desc, tech: t.projects.p1_tech, repo: t.projects.p1_repo, icon: <ShieldCheck size={28}/> },
+              { title: t.projects.p3_title, desc: t.projects.p3_desc, tech: t.projects.p3_tech, legacy: true, icon: <Layers size={28}/> }
+            ].map((p, i) => (
+              <motion.div key={i} initial={{opacity: 0, y: 30}} whileInView={{opacity: 1, y: 0}} transition={{delay: i * 0.1}} viewport={{once: true}} className="col-md-6">
+                <div className="glass-card d-flex flex-column">
+                  <div className="text-accent mb-4">{p.icon}</div>
+                  <h3 className="h4 mb-3 fw-bold">{p.title}</h3>
+                  <p className="text-muted-custom mb-4 small flex-grow-1">{p.desc}</p>
+                  <div className="mb-4">
+                    {p.tech.map(tech => <span key={tech} className="skill-badge">{tech}</span>)}
+                  </div>
+                  {p.legacy ? (
+                    <div className="text-center p-2 font-code small border border-dashed rounded text-muted-custom">{t.projects.btnLegacy}</div>
+                  ) : (
+                    <div className="d-flex gap-2">
+                      <a href={p.repo} target="_blank" rel="noreferrer" className="btn-goth flex-grow-1"><Github size={16} /> {t.projects.btnCode}</a>
+                      {p.live && <a href={p.live} target="_blank" rel="noreferrer" className="btn-goth flex-grow-1" style={{background: 'var(--accent)', color: '#fff'}}>{t.projects.btnLive}</a>}
+                    </div>
+                  )}
                 </div>
-                <div className="d-flex gap-2">
-                  <a href={t.projects.p4_repo} target="_blank" rel="noreferrer" className="btn-goth flex-grow-1 text-center"><Github size={16} /> {t.projects.btnCode}</a>
-                  <a href={t.projects.p4_live} target="_blank" rel="noreferrer" className="btn-goth flex-grow-1 text-center" style={{background: 'var(--accent)', color: '#fff'}}>{t.projects.btnLive}</a>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-md-6">
-              <div className="glass-card d-flex flex-column">
-                <Music size={28} className="text-accent mb-4" />
-                <h3 className="h4 mb-3">{t.projects.p2_title}</h3>
-                <p className="text-muted-custom mb-4 small flex-grow-1">{t.projects.p2_desc}</p>
-                <div className="mb-4">
-                  {t.projects.p2_tech.map(tech => <span key={tech} className="skill-badge">{tech}</span>)}
-                </div>
-                <div className="d-flex gap-2">
-                  <a href={t.projects.p2_repo} target="_blank" rel="noreferrer" className="btn-goth flex-grow-1 text-center">
-                    <Github size={16} /> {t.projects.btnCode}
-                  </a>
-                  <a href={t.projects.p2_live} target="_blank" rel="noreferrer" className="btn-goth flex-grow-1 text-center" style={{background: 'var(--accent)', color: '#fff'}}>{t.projects.btnLive}</a>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-md-6">
-              <div className="glass-card d-flex flex-column">
-                <ShieldCheck size={28} className="text-accent mb-4" />
-                <h3 className="h4 mb-3">{t.projects.p1_title}</h3>
-                <p className="text-muted-custom mb-4 small flex-grow-1">{t.projects.p1_desc}</p>
-                <div className="mb-4">
-                  {t.projects.p1_tech.map(tech => <span key={tech} className="skill-badge">{tech}</span>)}
-                </div>
-                <a href={t.projects.p1_repo} target="_blank" rel="noreferrer" className="btn-goth w-100 text-center"><Github size={16} /> {t.projects.btnCode}</a>
-              </div>
-            </div>
-
-            <div className="col-md-6">
-              <div className="glass-card d-flex flex-column">
-                <Layers size={28} className="text-accent mb-4" />
-                <h3 className="h4 mb-3">{t.projects.p3_title}</h3>
-                <p className="text-muted-custom mb-4 small flex-grow-1">{t.projects.p3_desc}</p>
-                <div className="mb-4">
-                  {t.projects.p3_tech.map(tech => <span key={tech} className="skill-badge">{tech}</span>)}
-                </div>
-                <div className="text-center p-2 font-code small border border-dashed text-muted-custom">{t.projects.btnLegacy}</div>
-              </div>
-            </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
       <section id="contact" className="py-5">
         <div className="container py-5 text-center">
-          <h2 className="mb-5 font-display display-5">{t.contact.title}</h2>
+          <motion.h2 initial={{opacity: 0}} whileInView={{opacity: 1}} viewport={{once: true}} className="mb-5 font-display display-5 fw-bold">{t.contact.title}</motion.h2>
           <div className="row justify-content-center text-start">
             <div className="col-lg-6">
-              <form ref={form} onSubmit={sendEmail}>
+              <form ref={form} onSubmit={sendEmail} className="glass-card">
                 <input type="text" name="name" className="input-underlined mb-4" placeholder={t.contact.placeholderName} required />
                 <input type="email" name="email" className="input-underlined mb-4" placeholder={t.contact.placeholderEmail} required />
                 <textarea name="message" className="input-underlined mb-4" rows="3" placeholder={t.contact.placeholderMsg} required></textarea>
                 <button type="submit" className="btn-goth w-100 py-3" disabled={formStatus !== 'idle'}>
                   {formStatus === 'sending' ? t.contact.sending : <>{t.contact.btn} <Send size={16} /></>}
                 </button>
-                {formStatus === 'success' && <div className="text-success mt-3 font-code text-center">{t.contact.success}</div>}
+                {formStatus === 'success' && <motion.div initial={{opacity: 0}} animate={{opacity: 1}} className="text-success mt-3 font-code text-center">{t.contact.success}</motion.div>}
               </form>
             </div>
           </div>
