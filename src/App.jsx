@@ -175,13 +175,19 @@ const App = () => {
       --font-display: 'Playfair Display', serif; --font-body: 'Inter', sans-serif;
       --font-code: 'Fira Code', monospace;
     }
+    
+    /* MELHORIA DO MODO CLARO PARA EXPERIÊNCIA DO USUÁRIO */
     [data-theme="light"] {
-      --bg-body: #fdfbf7; --bg-card: rgba(255, 255, 255, 0.8); --text-main: #2b2124; 
-      --text-muted: #665a5d; --accent: #800020; --border: rgba(128, 0, 32, 0.1);
+      --bg-body: #f8f9fa; 
+      --bg-card: rgba(255, 255, 255, 0.9); 
+      --text-main: #1a1a1a; 
+      --text-muted: #4a4a4a; 
+      --accent: #800020; 
+      --border: rgba(0, 0, 0, 0.1);
     }
+
     body { background-color: var(--bg-body) !important; color: var(--text-main) !important; font-family: var(--font-body); transition: all 0.3s; overflow-x: hidden; }
     
-    /* REMOVENDO SUBLINHADOS E CORRIGINDO LINKS */
     a { 
       text-decoration: none !important; 
       color: inherit !important; 
@@ -196,6 +202,12 @@ const App = () => {
       display: inline-block;
     }
 
+    [data-theme="light"] .text-gradient {
+      background: linear-gradient(90deg, var(--text-main), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
     .btn-goth { 
       border: 1px solid var(--accent); 
       color: var(--text-main); 
@@ -206,6 +218,12 @@ const App = () => {
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       display: inline-flex; align-items: center; gap: 8px;
     }
+    
+    [data-theme="light"] .btn-goth {
+      border-width: 1.5px;
+      font-weight: 500;
+    }
+
     .btn-goth:hover { 
       background: var(--accent); 
       color: #fff !important; 
@@ -229,7 +247,8 @@ const App = () => {
     }
     
     .nav-blur { background: rgba(10, 5, 8, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
-    
+    [data-theme="light"] .nav-blur { background: rgba(248, 249, 250, 0.8); }
+
     .skill-badge { 
       font-family: var(--font-code); 
       font-size: 0.85rem; 
@@ -241,6 +260,11 @@ const App = () => {
       margin: 0 8px 8px 0; 
       transition: all 0.3s;
     }
+    [data-theme="light"] .skill-badge {
+       background: rgba(0, 0, 0, 0.02);
+       color: var(--text-main);
+    }
+
     .skill-badge:hover {
       background: var(--accent);
       color: #fff !important;
@@ -250,7 +274,6 @@ const App = () => {
     .skill-category { border-left: 1px solid var(--border); padding-left: 1.5rem; margin-bottom: 2.5rem; }
     .text-accent { color: var(--accent) !important; }
 
-    /* CORREÇÃO DOS ÍCONES SOCIAIS */
     .social-icon {
       color: var(--text-muted) !important;
       transition: 0.3s;
@@ -261,6 +284,7 @@ const App = () => {
     }
 
     .input-underlined { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; color: var(--text-main); padding: 15px 20px; width: 100%; outline: none; transition: 0.3s; }
+    [data-theme="light"] .input-underlined { background: rgba(0, 0, 0, 0.02); }
     .input-underlined:focus { border-color: var(--accent); background: rgba(255,255,255,0.05); }
   `;
 
