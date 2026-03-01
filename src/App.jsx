@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import emailjs from '@emailjs/browser';
-import { motion } from 'framer-motion'; // Importação necessária
+import { motion } from 'framer-motion';
 import { 
   Database, Server, Layout, Cpu, Code2, Terminal, 
   Github, Linkedin, Mail, Globe, Moon, Sun, 
@@ -181,6 +181,14 @@ const App = () => {
     }
     body { background-color: var(--bg-body) !important; color: var(--text-main) !important; font-family: var(--font-body); transition: all 0.3s; overflow-x: hidden; }
     
+    /* REMOVENDO SUBLINHADOS E CORRIGINDO LINKS */
+    a { 
+      text-decoration: none !important; 
+      color: inherit !important; 
+      transition: 0.3s; 
+    }
+    a:hover { color: var(--accent) !important; }
+
     .text-gradient {
       background: linear-gradient(90deg, #fff, var(--accent));
       -webkit-background-clip: text;
@@ -241,6 +249,17 @@ const App = () => {
 
     .skill-category { border-left: 1px solid var(--border); padding-left: 1.5rem; margin-bottom: 2.5rem; }
     .text-accent { color: var(--accent) !important; }
+
+    /* CORREÇÃO DOS ÍCONES SOCIAIS */
+    .social-icon {
+      color: var(--text-muted) !important;
+      transition: 0.3s;
+    }
+    .social-icon:hover {
+      color: var(--accent) !important;
+      transform: translateY(-3px);
+    }
+
     .input-underlined { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; color: var(--text-main); padding: 15px 20px; width: 100%; outline: none; transition: 0.3s; }
     .input-underlined:focus { border-color: var(--accent); background: rgba(255,255,255,0.05); }
   `;
@@ -361,9 +380,28 @@ const App = () => {
       <footer className="py-5 border-top border-secondary mt-5">
         <div className="container text-center text-muted-custom font-code small">
           <div className="d-flex gap-4 justify-content-center mb-4">
-            <a href="https://www.linkedin.com/in/isabella-dos-anjos/" target="_blank" rel="noreferrer" className="text-muted-custom"><Linkedin /></a>
-            <a href="https://github.com/isabellascarassatii" target="_blank" rel="noreferrer" className="text-muted-custom"><Github /></a>
-            <a href="mailto:bellaadevs@gmail.com" className="text-muted-custom"><Mail /></a>
+            <a 
+              href="https://www.linkedin.com/in/isabella-dos-anjos/" 
+              target="_blank" 
+              rel="noreferrer" 
+              className="social-icon"
+            >
+              <Linkedin />
+            </a>
+            <a 
+              href="https://github.com/isabellascarassatii" 
+              target="_blank" 
+              rel="noreferrer" 
+              className="social-icon"
+            >
+              <Github />
+            </a>
+            <a 
+              href="mailto:bellaadevs@gmail.com" 
+              className="social-icon"
+            >
+              <Mail />
+            </a>
           </div>
           <p>{t.footer.copy}</p>
         </div>
